@@ -3,12 +3,12 @@ from proj_01_parse import parseNextSonnet
 from nose.tools import assert_equals, raises
 
 def test_sonnetparse_1():
-    sonnet = "No Leading Blank Lines|body1|body2".split("|")
-    assert_equals( (3, "No Leading Blank Lines",["body1", "body2"]), parseNextSonnet(0, sonnet))
+    sonnets = "No Leading Blank Lines|body1|body2".split("|")
+    assert_equals( (3, "No Leading Blank Lines",["body1", "body2"]), parseNextSonnet(0, sonnets))
 
 def test_sonnetparse_2():
-    sonnet = ["","  ","Many Leading Blank Lines", "", "", "body1", "body2", "", ""]
-    assert_equals( (7, "Many Leading Blank Lines",["body1", "body2"]), parseNextSonnet(0, sonnet))
+    sonnets = ["","  ","Many Leading Blank Lines", "", "", "body1", "body2", "", ""]
+    assert_equals( (7, "Many Leading Blank Lines",["body1", "body2"]), parseNextSonnet(0, sonnets))
 
 
 #
@@ -17,11 +17,14 @@ def test_sonnetparse_2():
 #     decorators are "function helpers" - they're just functions themselves.
 @raises(ValueError)
 def test_sonnet_NoBody():
-    sonnet = ["This is just a title"]
-    (i, title, txt) = parseNextSonnet(0,sonnet)
+    sonnets = ["This is just a title"]
+    (i, title, txt) = parseNextSonnet(0,sonnets)
 
 @raises(ValueError)
 def test_sonnet_BadIndex():
-    sonnet = ["Fred oh no start wrong place!"]
-    (i, title, txt) = parseNextSonnet(1000,sonnet)
+    sonnets = ["Fred oh no start wrong place!"]
+    (i, title, txt) = parseNextSonnet(1000,sonnets)
 
+def test_last_sonnet():
+    sonnets = ["some","sonnet","here"]
+    assert_equals((3,"",[]), parseNextSonnet(3, sonnets))

@@ -17,14 +17,18 @@ def parseNextSonnet(startIndex: int, sonnetText: [str]) -> (int, str, [str]):
     :param startIndex: Where to start parsing the next sonnet in the sonnet text
     :param sonnetText: Text of all the sonnets
     :return: a tuple of (int, str, [str]) the remaining index, sonnet title and list of lines.
+    If there are no more sonnets, we should return an empty title and list.
     """
     # Note the parameter name is long.
     # The parameter name tells you what the meaning of the parameter is.
     # But we can use a shorter index variable in the code
     i = startIndex
     try:
-        # skip any leading blank lines
-        while sonnetText[i].strip() == "":  i += 1
+        # skip any leading blank lines.  Careful not to step off the end if we're out of sonnets.
+        while i < len(sonnetText) and sonnetText[i].strip() == "":  i += 1
+        if i == len(sonnetText):
+            # we've stepped off the end.  No more sonnets.
+            return (i, "", [])
         # get the title and go to next line
         title = sonnetText[i]; i += 1
         # skip any more blank lines to get to the body
@@ -34,7 +38,6 @@ def parseNextSonnet(startIndex: int, sonnetText: [str]) -> (int, str, [str]):
         while i < len(sonnetText) and sonnetText[i].strip() != "":
             body.append(sonnetText[i])
             i += 1
-
 
     except IndexError:
         raise ValueError("Sonnet Text is not in a valid format, or start index is out of bounds.")

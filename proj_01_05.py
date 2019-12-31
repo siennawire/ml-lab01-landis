@@ -78,6 +78,31 @@ def sonnetIndex(sonnetText: [str]) -> [(str, [str])]:
 
 
 
+#  Part 01.09
+#
+#
+def fetchAndPrintSonnet():
+    # use read_fileAsList to read the sonnet file, and store the lines in a variable
+    # use extract_GutenText with the variable above, and store just the sonnet text
+    # use sonnetIndex with the variable above and extract a list of (title, sonnet) pairs
+    #    store the result in variable "sonnets" so that it is compatible with the code below...
+
+    # now let's prompt the user for a sonnet and display it.  Try 0.
+    s = ""
+    while s.lower() != "done":
+        s = input("Which sonnet? or done to end")
+        if s != 'done':
+            try:
+                (title, sonnet) = sonnets[int(s)]
+            except ValueError as verr:
+                print("I can't convert what you typed to an integer")
+            except IndexError as ierr:
+                print(f"Sonnets go from 0 to {len(sonnets)}")
+        print(f"*** {title} ***")
+        print("\n".join(sonnet))
+
+
+
 if __name__ == "__main__":
     # This code only runs when you run this python file directly.
     pass

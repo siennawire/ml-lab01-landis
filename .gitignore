@@ -3,6 +3,7 @@
 
 # Mars files - for mars solutions to stuff
 *mars.py
+*mars.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

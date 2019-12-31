@@ -1,3 +1,9 @@
+# Pycharm
+*.idea
+
+# Mars files - for mars solutions to stuff
+*mars.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -9,8 +9,8 @@ So we'll also be writing a test function for this one.
 #  Copy and paste your code here from previous exercise:
 
 def read_fileAsList( fname ):
-    pass
-
+    with  open(fname) as f:
+        return [  (line[:-1] if line[-1] == "\n" else line) for line in f.readlines()]
 
 # optional 01.06.  You can come back and do this LATER.
 def find_lineWithTextInList(direction, somelist,  sometext, startingPoint = None):
@@ -106,4 +106,17 @@ def fetchAndPrintSonnet():
 if __name__ == "__main__":
     # This code only runs when you run this python file directly.
     pass
+
+
+def stuff():
+    from bs4 import BeautifulSoup
+    import requests
+
+    url = "https://www.pythonforbeginners.com"
+    with requests.Session() as s:
+        response = s.get(url)
+        print(response.status_code)
+        soup = BeautifulSoup(response.content)
+        print(soup.prettify())
+
 

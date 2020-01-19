@@ -31,8 +31,10 @@ def extract_GutenText(lines):
     startpoint2 = find_lineWithTextInList(1, lines, "", startpoint1)
     endpoint1 = find_lineWithTextInList(1, lines, "project gutenberg")
     endpoint2 = find_lineWithTextInList(-1, lines, "", endpoint1)
-    return lines[startpoint2+1: endpoint2]
-
+    result = lines[startpoint2 + 1: endpoint2]
+    if len(result) == 0:
+        raise ValueError("The text seems to be empty.  Maybe a marker is missing.")
+    return result
 
 
 def get_gutentextURLs() :
